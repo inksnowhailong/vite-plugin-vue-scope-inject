@@ -1,7 +1,7 @@
 {
   "name": "scopeinject",
-  "version": "1.0.4",
-  "description": "将ts文件export的内容在编译注入到指定位置中,标记： //HACK ScopeInject<{\"url\":\"./hook\"}>",
+  "version": "1.0.5",
+  "description": "将ts文件export的内容在编译注入到指定位置中,标记： //HACK ScopeInject<{\"url\":\"./hook\",\"debug\":false}>",
   "main": "dist/scopeInject.js",
   "types": "dist/scopeInject.d.ts",
   "scripts": {
