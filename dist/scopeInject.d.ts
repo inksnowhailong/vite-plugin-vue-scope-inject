@@ -1,7 +1,12 @@
 export default function scopeInject(): {
     name: string;
-    transform(code: any, id: any): {
-        code: any;
+    configureServer(server: any): void;
+    transform(code: string, id: string): {
+        code: string;
         map: null;
     } | undefined;
+};
+export type optionType = {
+    url: string;
+    debug?: boolean;
 };

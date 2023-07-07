@@ -1,11 +1,16 @@
 {
   "name": "scopeinject",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "将ts文件export的内容在编译注入到指定位置中,标记： //HACK ScopeInject<{\"url\":\"./hook\",\"debug\":false}>",
   "main": "dist/scopeInject.js",
   "types": "dist/scopeInject.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"npx tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inksnowhailong/vite-plugin-vue-scope-inject"
   },
   "author": "inksnow 墨雪浅言",
   "license": "ISC",
