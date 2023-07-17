@@ -148,17 +148,25 @@ function removeOldImport(code, path) {
     code = code.replace(regex, '');
     return code;
 }
+// 建立一个容器，记录已经添加过的监听器，防止重复监听
+const serverNewChangeMap = new Map();
 // 添加对构建入 页面的ts文件的热更新
 function watcherAddFile(_server, allFiles, id) {
-    _server.watcher.on('change', (file) => {
-        if (allFiles.some((path) => {
-            return (0, path_1.resolve)(path) === (0, path_1.resolve)(file);
-        })) {
-            const moduleVue = _server.moduleGraph.getModuleById(id);
-            _server.moduleGraph.invalidateModule(moduleVue);
-            // vite 低版本 没这个函数 就只能手动刷新页面来响应式更新监听的ts文件的变更
-            _server?.reloadModule?.(moduleVue);
-        }
-    });
+    if (!_server)
+        return;
+    // 如何未对这个files组合的内容监听过，添加一个新的监听
+    if (!serverNewChangeMap.has(id)) {
+        serverNewChangeMap.set(id, allFiles);
+        _server.watcher.on('change', (file) => {
+            if (allFiles.some((path) => {
+                return (0, path_1.resolve)(path) === (0, path_1.resolve)(file);
+            })) {
+                const moduleVue = _server.moduleGraph.getModuleById(id);
+                _server.moduleGraph.invalidateModule(moduleVue);
+                // vite 低版本 没这个函数 就只能手动刷新页面来响应式更新监听的ts文件的变更
+                _server?.reloadModule?.(moduleVue);
+            }
+        });
+    }
     // const watchedPaths = _server.watcher.getWatched()
 }
